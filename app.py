@@ -26,9 +26,9 @@ def index():
 
         username = session["username"]
 
-    result = db.session.execute("SELECT username FROM users WHERE admin_rights = 1")
-    admins = result.fetchall()
-    admin_rights = False
+    result = db.session.execute("SELECT admin_rights FROM users WHERE username =:username", {'username':username})
+    admin_rights = result.fetchone()
+    
 
     #if session["username"] != None and session["username"] in admins:
 
@@ -69,7 +69,7 @@ def index():
     result = db.session.execute("SELECT content, message_id FROM comments")
     comments = result.fetchall()
 
-    return render_template("index.html", count=count, forums=forums, message_list=message_list, session = session, id_num = id_num, admins = admins, secret_forums = secret_forums) 
+    return render_template("index.html", count=count, forums=forums, message_list=message_list, session = session, id_num = id_num, admin_rights = admin_rights, secret_forums = secret_forums) 
 
 
 @app.route("/forum/<int:forum_id>")
