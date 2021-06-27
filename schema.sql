@@ -33,6 +33,7 @@ CREATE TABLE comments (
 
 CREATE TABLE secret_forums (
     id SERIAL PRIMARY KEY,
+    subject Text,
     users TEXT[]
 );
 
