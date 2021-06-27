@@ -102,7 +102,7 @@ def secret_forum(forum_id):
     print('Hello world!', file=sys.stderr)
 
 
-    return render_template("forum.html", count=count, messages=messages, comments=comments, session = session, id_num = id_num, forum_id = forum_id, args = args) 
+    return render_template("secret_forum.html", count=count, messages=messages, comments=comments, session = session, id_num = id_num, forum_id = forum_id, args = args) 
 
 @app.route("/login",methods=["POST"])
 def login():
