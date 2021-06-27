@@ -194,7 +194,7 @@ def new():
 def send():
     content = request.form["content"]
     kayttaja = session["username"]
-    aika = datetime.now()
+    aika = datetime.now().replace(second=0, microsecond=0)
     forum_id = request.form['forum_id']
     sql = "INSERT INTO messages (content, username, sent_at, forum_id) VALUES (:content,:kayttaja,:aika,:forum_id)"
     db.session.execute(sql, {"content":content,"kayttaja":kayttaja,"aika":aika,'forum_id':forum_id})
@@ -213,7 +213,7 @@ def send_comment():
     forum_id = request.form["forum_id"]
     username = session["username"]
     sent_at = datetime.now()
-    sql = "INSERT INTO comments (content,message_id,forum_id,users,sent_at) VALUES (:content,:message_id,:forum_id, :username, :sent_at)"
+    sql = "INSERT INTO comments (content,message_id,forum_id,username,sent_at) VALUES (:content,:message_id,:forum_id, :username, :sent_at)"
     db.session.execute(sql, {"content":content, "message_id":message_id, "forum_id":forum_id, "username":username,"sent_at":sent_at})
     db.session.commit()
     return redirect("/")
