@@ -330,8 +330,6 @@ def update_secret_comment():
 
 @app.route("/delete_message/<int:id_num>")
 def delete_message(id_num):
-    
-    forum_id = request.form["forum_id"]
         
     sql = "DELETE From messages WHERE id = :id_num"
     sql2 = "Delete From comments Where message_id = :id_num"
@@ -346,8 +344,6 @@ def delete_message(id_num):
 
 @app.route("/delete_secret_message/<int:id_num>")
 def delete_secret_message(id_num):
-    
-    forum_id = request.form["forum_id"]
     
     sql = "DELETE From secret_messages WHERE id = :id_num"
     sql2 = "Delete From secret_comments Where message_id = :id_num"
