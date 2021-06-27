@@ -37,7 +37,7 @@ Keskusteluja: {{ message_list[loop.index] }}
 <a href="{{ url_for('forum',forum_id = forum[1]) }}">Mene palstalle!</a>
 <br>
 {% if admin_rights == '1' %}
-<a href="{{ url_for('delete_forum', id_num = forum[0]) }}">Poista palsta</a>
+<a href="{{ url_for('delete_forum', id_num = forum[1]) }}">Poista palsta</a>
 {%endif%}
 <hr>
 
