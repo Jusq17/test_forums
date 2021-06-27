@@ -41,18 +41,14 @@ Keskusteluja: {{ message_list[loop.index] }}
 {% for forum in secret_forums %}
 {% set id_num = loop.index %}
 {{id_num}}
-{{ forum[0] }}
+{{ forum[1] }}
 <br>
-<br>
-Käyttajä:{{ forum[2] }}
-<br>
-{{ forum[3] }}
 <br>
 
 Keskusteluja: {{ message_list[loop.index] }}
 
 <br>
-<a href="{{ url_for('forum',forum_id = forum[0]) }}">Mene palstalle!</a>
+<a href="{{ url_for('secret_forum',forum_id = forum[0]) }}">Mene palstalle!</a>
 <br>
 
 {{ admins }}
