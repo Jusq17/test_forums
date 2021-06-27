@@ -217,6 +217,17 @@ def send():
     db.session.commit()
     return redirect("/")
 
+@app.route("/send_secret_message", methods=["POST"])
+def send_secret_message():
+    content = request.form["content"]
+    kayttaja = session["username"]
+    aika = datetime.now().replace(second=0, microsecond=0)
+    forum_id = request.form['forum_id']
+    sql = "INSERT INTO secret_messages (content, username, sent_at, forum_id) VALUES (:content,:kayttaja,:aika,:forum_id)"
+    db.session.execute(sql, {"content":content,"kayttaja":kayttaja,"aika":aika,'forum_id':forum_id})
+    db.session.commit()
+    return redirect("/")
+
 
 @app.route("/comment/<int:id_num>/<int:forum_id>")
 def comment(id_num, forum_id):
@@ -228,8 +239,20 @@ def send_comment():
     message_id = request.form["id_num"]
     forum_id = request.form["forum_id"]
     username = session["username"]
-    sent_at = datetime.now()
+    sent_at = datetime.now().replace(second=0, microsecond=0)
     sql = "INSERT INTO comments (content,message_id,forum_id,username,sent_at) VALUES (:content,:message_id,:forum_id, :username, :sent_at)"
+    db.session.execute(sql, {"content":content, "message_id":message_id, "forum_id":forum_id, "username":username,"sent_at":sent_at})
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/send_secret_comment", methods=["POST"])
+def send_secret_comment():
+    content = request.form["content"]
+    message_id = request.form["id_num"]
+    forum_id = request.form["forum_id"]
+    username = session["username"]
+    sent_at = datetime.now().replace(second=0, microsecond=0)
+    sql = "INSERT INTO secret_comments (content,message_id,forum_id,username,sent_at) VALUES (:content,:message_id,:forum_id, :username, :sent_at)"
     db.session.execute(sql, {"content":content, "message_id":message_id, "forum_id":forum_id, "username":username,"sent_at":sent_at})
     db.session.commit()
     return redirect("/")
@@ -238,10 +261,17 @@ def send_comment():
 def edit_message(id_num):
     return render_template("edit_message.html",id_num = id_num)
 
+@app.route("/edit_secret_message/<int:id_num>")
+def edit_message(id_num):
+    return render_template("edit_secret_message.html",id_num = id_num)
+
 @app.route("/edit_comment/<int:id_num>/<int:forum_id>") 
 def edit_comment(id_num, forum_id):
     return render_template("edit_comment.html", id_num = id_num, forum_id = forum_id)
 
+@app.route("/edit_secret_comment/<int:id_num>/<int:forum_id>") 
+def edit_comment(id_num, forum_id):
+    return render_template("edit_secret_comment.html", id_num = id_num, forum_id = forum_id)
 
 @app.route("/update_message", methods=["POST"])
 def update_message():
@@ -253,12 +283,32 @@ def update_message():
     db.session.commit()
     return redirect("/")
 
+@app.route("/update_secret_message", methods=["POST"])
+def update_secret_message():
+    content = request.form["content"]
+    id_num = request.form["id_num"]
+    #forum_id = request.form["forum_id"]
+    sql = "UPDATE secret_messages Set content = :content Where id =:id_num"
+    db.session.execute(sql, {"content":content, "id_num":id_num})
+    db.session.commit()
+    return redirect("/")
+
 @app.route("/update_comment", methods=["POST"])
 def update_comment():
     content = request.form["content"]
     id_num = request.form["id_num"]
     forum_id = request.form["forum_id"]
     sql = "UPDATE comments Set content = :content Where id =:id_num and forum_id = :forum_id"
+    db.session.execute(sql, {"content":content, "id_num":id_num, "forum_id":forum_id})
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/update_secret_comment", methods=["POST"])
+def update_secret_comment():
+    content = request.form["content"]
+    id_num = request.form["id_num"]
+    forum_id = request.form["forum_id"]
+    sql = "UPDATE secret_comments Set content = :content Where id =:id_num and forum_id = :forum_id"
     db.session.execute(sql, {"content":content, "id_num":id_num, "forum_id":forum_id})
     db.session.commit()
     return redirect("/")
