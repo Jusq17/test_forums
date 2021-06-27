@@ -389,7 +389,7 @@ def delete_forum(id_num):
     return redirect("/")
 
 @app.route("/delete_secret_forum/<int:id_num>")
-def delete_forum(id_num):
+def delete_secret_forum(id_num):
     
     sql = "DELETE From secret_forums WHERE id = :id_num"
     sql2 = "DELETE From secret_messages WHERE forum_id = :id_num"
