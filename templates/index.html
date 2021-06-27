@@ -1,0 +1,90 @@
+{% if session.username %}
+
+<p>Olet kirjautunut nimellä {{ session.username }}</p>
+<a href="/logout">Kirjaudu ulos</a>
+Keskustelut: {{ count }}
+<hr>
+Haku:
+<br>
+<form action="/search" method="POST">
+      <br>
+      <textarea name="content" rows="3" cols="40"></textarea>
+      <br>
+      <textarea hidden name="forum_id">{{forum_id}}</textarea>
+      <input type="submit" value="Lähetä">
+      </form>
+
+      {% for result in results %}
+      {{ result[0] }}
+      {% endfor %}
+<hr>
+{% for forum in forums %}
+{% set id_num = loop.index %}
+{{id_num}}
+{{ forum[0] }}
+<br>
+<br>
+Käyttajä:{{ forum[2] }}
+<br>
+{{ forum[3] }}
+<br>
+
+Keskusteluja: {{ message_list[loop.index] }}
+
+<br>
+<a href="{{ url_for('forum',forum_id = loop.index) }}">Mene palstalle!</a>
+<hr>
+
+{% endfor %}
+
+<hr>
+{% for forum in secret_forums %}
+{% set id_num = loop.index %}
+{{id_num}}
+{{ forum[0] }}
+<br>
+<br>
+Käyttajä:{{ forum[2] }}
+<br>
+{{ forum[3] }}
+<br>
+
+Keskusteluja: {{ message_list[loop.index] }}
+
+<br>
+<a href="{{ url_for('forum',forum_id = loop.index) }}">Mene palstalle!</a>
+<br>
+
+{{ admins }}
+
+{% if session["username"] in admins %}
+<a href="{{ url_for('delete_forum', id_num = loop.index) }}">Poista palsta</a>
+<hr>
+{%endif%}
+
+{% endfor %}
+{{id_num}}
+
+{% if session["username"] in admins %}
+<a href="/new_forum">Tee uusi keskustelualue!</a>
+
+{% endif %}
+{% else %}
+<p class="flashes">Kirjaudu sisään!</p>
+{% with messages = get_flashed_messages() %}  
+         {% if messages %}  
+               {% for message in messages %}  
+                    <p>{{ message }}</p>  
+               {% endfor %}  
+         {% endif %}  
+      {% endwith %}  
+<form action="/login" method="POST">
+<p>Tunnus:<br>
+<input type="text" name="username"></p>
+<p>Salasana:<br>
+<input type="password" name="password"></p>
+<input type="submit" value="Kirjaudu">
+</form>
+<a href="/register">Rekisteröidy</a>
+{% endif %}
+
