@@ -1,7 +1,10 @@
 {% if session.username %}
+<a href="/logout">Kirjaudu ulos</a>
+
+<br>
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
-<a href="/logout">Kirjaudu ulos</a>
+
 Palstoja: {{ count }}
 <hr>
 Haku:
