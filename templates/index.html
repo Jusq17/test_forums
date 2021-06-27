@@ -52,7 +52,7 @@ Käyttajä:{{ forum[2] }}
 Keskusteluja: {{ message_list[loop.index] }}
 
 <br>
-<a href="{{ url_for('forum',forum_id = loop.index) }}">Mene palstalle!</a>
+<a href="{{ url_for('forum',forum_id = forum[0]) }}">Mene palstalle!</a>
 <br>
 
 {{ admins }}
