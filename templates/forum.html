@@ -39,13 +39,14 @@ Käyttajä:{{ message[2] }}
 
 Kommentit:
 <br>
+<br>
 {% for comment in comments %}
 
 {% if comment[4] == message[1] %}
-{{ comment[1] }}
+{{ "  " + comment[1] }}
 <br>
-Käyttajä: {{ comment[2] }}
-<br> {{ comment[3] }}
+Lähettäjä: {{ "  " + comment[2] }}
+<br> {{ "  " + comment[3] }}
 <br>
 
 {% if comment[2] == session["username"] %}
