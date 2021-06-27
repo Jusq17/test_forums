@@ -334,10 +334,35 @@ def delete_message(id_num):
 
     return redirect("/")
 
+@app.route("/delete_secret_message/<int:id_num>")
+def delete_secret_message(id_num):
+    
+    sql = "DELETE From secret_messages WHERE id = :id_num"
+    sql2 = "Delete From secret_comments Where message_id = :id_num"
+    db.session.execute(sql, {"id_num":id_num})
+    db.session.commit()
+
+    db.session.execute(sql2, {"id_num":id_num})
+
+    db.session.commit()
+
+    return redirect("/")
+
+
 @app.route("/delete_comment/<int:id_num>")
 def delete_comment(id_num):
     
     sql = "DELETE From comments WHERE id = :id_num"
+
+    db.session.execute(sql, {"id_num":id_num})
+    db.session.commit()
+
+    return redirect("/")
+
+@app.route("/delete_secret_comment/<int:id_num>")
+def delete_secret_comment(id_num):
+    
+    sql = "DELETE From secret_comments WHERE id = :id_num"
 
     db.session.execute(sql, {"id_num":id_num})
     db.session.commit()
@@ -350,6 +375,25 @@ def delete_forum(id_num):
     sql = "DELETE From forums WHERE id = :id_num"
     sql2 = "DELETE From messages WHERE forum_id = :id_num"
     sql3 = "DELETE From comments WHERE forum_id = :id_num"
+
+
+    db.session.execute(sql, {"id_num":id_num})
+    db.session.commit()
+
+    db.session.execute(sql2, {"id_num":id_num})
+    db.session.commit()
+
+    db.session.execute(sql3, {"id_num":id_num})
+    db.session.commit()
+
+    return redirect("/")
+
+@app.route("/delete_secret_forum/<int:id_num>")
+def delete_forum(id_num):
+    
+    sql = "DELETE From secret_forums WHERE id = :id_num"
+    sql2 = "DELETE From secret_messages WHERE forum_id = :id_num"
+    sql3 = "DELETE From secret_comments WHERE forum_id = :id_num"
 
 
     db.session.execute(sql, {"id_num":id_num})
