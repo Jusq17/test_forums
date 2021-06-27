@@ -21,6 +21,8 @@ db = SQLAlchemy(app)
 
 @app.route("/")
 def index():
+    
+    admin_rights = 0
 
     if 'username' in session:
 
