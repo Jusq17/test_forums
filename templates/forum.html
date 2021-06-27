@@ -40,7 +40,7 @@ Käyttajä:{{ message[2] }}
 Kommentit:
 <br>
 <br>
-<span style="color:blue">
+
 {% for comment in comments %}
 
 {% if comment[4] == message[1] %}
@@ -58,7 +58,7 @@ Lähettäjä: {{ "  " + comment[2] }}
 <br>
 
 {% endif %}
-</span>
+
 {% endfor %}
 
 <br>
