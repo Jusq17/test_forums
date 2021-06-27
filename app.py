@@ -32,6 +32,8 @@ def index():
         if len(admin_rights) > 0:
             
             admin_rights = int(admin_rights.strip(",'()"))
+        else:
+            admin_rights = 0
     
 
     #if session["username"] != None and session["username"] in admins:
