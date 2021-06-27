@@ -2,16 +2,15 @@
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
-Keskustelut: {{ count }}
+Palstoja: {{ count }}
 <hr>
 Haku:
-<br>
 <form action="/search" method="POST">
       <br>
       <textarea name="content" rows="3" cols="40"></textarea>
       <br>
       <textarea hidden name="forum_id">{{forum_id}}</textarea>
-      <input type="submit" value="Lähetä">
+      <input type="submit" value="Hae">
       </form>
 
       {% for result in results %}
