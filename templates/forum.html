@@ -46,7 +46,7 @@ Kommentit:
 {{ "  " + comment[1] }}
 <br>
 Lähettäjä: {{ "  " + comment[2] }}
-<br> {{ "  " + comment[3] }}
+<br> {{ "  " + str(comment[3]) }}
 <br>
 
 {% if comment[2] == session["username"] %}
