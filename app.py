@@ -80,7 +80,7 @@ def forum(forum_id):
     count = result.fetchone()[0]
     result = db.session.execute("SELECT content, id, username, sent_at FROM messages WHERE forum_id=:forum_id Group By id", {"forum_id":forum_id})
     messages = result.fetchall()
-    result = db.session.execute("SELECT id, content, users, sent_at, message_id, forum_id FROM comments WHERE forum_id=:forum_id GROUP BY id", {"forum_id":forum_id})
+    result = db.session.execute("SELECT id, content, username, sent_at, message_id, forum_id FROM comments WHERE forum_id=:forum_id GROUP BY id", {"forum_id":forum_id})
     comments = result.fetchall()
     args = (request.view_args)
     print('Hello world!', file=sys.stderr)
