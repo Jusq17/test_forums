@@ -290,7 +290,7 @@ def edit_secret_comment(id_num, forum_id):
 def update_message():
     content = request.form["content"]
     id_num = request.form["id_num"]
-    forum_id = request.form["forum_id"]
+    
     sql = "UPDATE messages Set content = :content Where id =:id_num"
     db.session.execute(sql, {"content":content, "id_num":id_num})
     db.session.commit()
@@ -300,7 +300,7 @@ def update_message():
 def update_secret_message():
     content = request.form["content"]
     id_num = request.form["id_num"]
-    forum_id = request.form["forum_id"]
+  
     sql = "UPDATE secret_messages Set content = :content Where id =:id_num"
     db.session.execute(sql, {"content":content, "id_num":id_num})
     db.session.commit()
@@ -310,7 +310,7 @@ def update_secret_message():
 def update_comment():
     content = request.form["content"]
     id_num = request.form["id_num"]
-    forum_id = request.form["forum_id"]
+    
     sql = "UPDATE comments Set content = :content Where id =:id_num"
     db.session.execute(sql, {"content":content, "id_num":id_num})
     db.session.commit()
@@ -320,7 +320,7 @@ def update_comment():
 def update_secret_comment():
     content = request.form["content"]
     id_num = request.form["id_num"]
-    forum_id = request.form["forum_id"]
+   
     sql = "UPDATE secret_comments Set content = :content Where id =:id_num and forum_id = :forum_id"
     db.session.execute(sql, {"content":content, "id_num":id_num, "forum_id":forum_id})
     db.session.commit()
@@ -449,64 +449,3 @@ def search():
 
     return render_template("/search_results.html", messages = messages, comments = comments)
 
-def create_tables():
-
-    sql = '''
-    
-    CREATE TABLE users (
-        id SERIAL PRIMARY KEY,
-        username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        s_word TEXT,
-        admin_rights INT 
-    );
-
-    CREATE TABLE forums (
-        id SERIAL PRIMARY KEY,
-        subject TEXT,
-        username TEXT,
-        sent_at TIMESTAMP
-    );
-
-    CREATE TABLE messages (
-        id SERIAL PRIMARY KEY,
-        content TEXT,
-        username TEXT,
-        sent_at TIMESTAMP,
-        forum_id INT
-    );
-
-    CREATE TABLE comments (
-        id SERIAL PRIMARY KEY,
-        content TEXT,
-        message_id INT,
-        forum_id INT,
-        username TEXT,
-        sent_at TIMESTAMP
-    );
-
-    CREATE TABLE secret_forums (
-        id SERIAL PRIMARY KEY,
-        users TEXT[]
-    );
-
-    CREATE TABLE secret_messages (
-        id SERIAL PRIMARY KEY,
-        content TEXT,
-        username TEXT,
-        sent_at TIMESTAMP,
-        forum_id INT
-    );
-
-    CREATE TABLE secret_comments (
-        id SERIAL PRIMARY KEY,
-        content TEXT,
-        message_id INT,
-        forum_id INT,
-        username TEXT,
-        sent_at TIMESTAMP
-    );
-
-        ''' 
-    
-    db.session.execute(sql)
