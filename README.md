@@ -6,6 +6,7 @@ Tämä on keskustelusovellus, jonka ominaisuuksiin kuuluu:
 - Omia keskusteluaiheita ja viestejä voi muokata tai poistaa
 - Admin voi luoda uuden keskustelupalstan tai poistaa olemassa olevan
 - Tietokantaan voi luoda salaisen palvelimen komentoriviä käyttäen ja määrittää ketkä pääsevät palstalle
+- Voi hakea keskusteluaiheita ja viestejä hakusanalla
 
 Sovelluksen toimintaperiaate on se, että käyttäjän syöttämät tiedot otetaan vastaan ja viedään tietokantaan.
 Tieto otetaan tietokannasta ulos ja näytetään sovelluksen front-end:ssa.
