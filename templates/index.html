@@ -53,14 +53,14 @@ Keskusteluja: {{ message_list[loop.index] }}
 
 {{ admins }}
 
-{% if admin_rights == 1 %}
+{% if admin_rights == '1' %}
 <a href="{{ url_for('delete_forum', id_num = loop.index) }}">Poista palsta</a>
 <hr>
 {%endif%}
 
 {% endfor %}
 
-{% if admin_rights == 1 %}
+{% if admin_rights == '1' %}
 <a href="/new_forum">Tee uusi keskustelualue!</a>
 
 {% endif %}
