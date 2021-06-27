@@ -203,7 +203,7 @@ def new_forum():
 def add_forum():
     content = request.form["content"]
     user = session["username"]
-    sent_at = datetime.now()
+    sent_at = datetime.now().replace(second=0, microsecond=0)
     sql = "INSERT INTO forums (subject, username, sent_at) VALUES (:content,:user,:sent_at)"
     db.session.execute(sql, {"content":content,"user":user,"sent_at":sent_at})
     db.session.commit()
