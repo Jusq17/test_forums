@@ -89,10 +89,10 @@ def forum(forum_id):
     return render_template("forum.html", count=count, messages=messages, comments=comments, session = session, id_num = id_num, forum_id = forum_id, args = args) 
 
 @app.route("/secret_forum/<int:forum_id>")
-def forum(forum_id):
+def secret_forum(forum_id):
     id_num = 1
     comment_list = []
-    result = db.session.execute("SELECT COUNT(*) FROM messages")
+    result = db.session.execute("SELECT COUNT(*) FROM secret_messages")
     count = result.fetchone()[0]
     result = db.session.execute("SELECT content, id, username, sent_at FROM secret_messages WHERE forum_id=:forum_id Group By id", {"forum_id":forum_id})
     messages = result.fetchall()
