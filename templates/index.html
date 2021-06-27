@@ -32,7 +32,7 @@ Käyttajä:{{ forum[2] }}
 Keskusteluja: {{ message_list[loop.index] }}
 
 <br>
-<a href="{{ url_for('forum',forum_id = forum[0]) }}">Mene palstalle!</a>
+<a href="{{ url_for('forum',forum_id = forum[1]) }}">Mene palstalle!</a>
 <hr>
 
 {% endfor %}
@@ -54,7 +54,7 @@ Keskusteluja: {{ message_list[loop.index] }}
 {{ admins }}
 
 {% if admin_rights == '1' %}
-<a href="{{ url_for('delete_forum', id_num = forum[0]) }}">Poista palsta</a>
+<a href="{{ url_for('delete_forum', id_num = forum[1]) }}">Poista palsta</a>
 <hr>
 {%endif%}
 
