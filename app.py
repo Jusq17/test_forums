@@ -311,8 +311,8 @@ def update_comment():
     content = request.form["content"]
     id_num = request.form["id_num"]
     forum_id = request.form["forum_id"]
-    sql = "UPDATE comments Set content = :content Where id =:id_num and forum_id = :forum_id"
-    db.session.execute(sql, {"content":content, "id_num":id_num, "forum_id":forum_id})
+    sql = "UPDATE comments Set content = :content Where id =:id_num"
+    db.session.execute(sql, {"content":content, "id_num":id_num})
     db.session.commit()
     return redirect("/")
 
