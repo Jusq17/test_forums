@@ -48,7 +48,7 @@ Käyttajä: {{ comment[2] }}
 <br> {{ comment[3] }}
 <br>
 
-{% if message[2] == session["username"] %}
+{% if comment[2] == session["username"] %}
 <a href="{{ url_for('edit_comment',id_num = comment[0], forum_id = forum_id) }}">Muokkaa</a>
 <a href="{{ url_for('delete_comment', id_num = comment[0]) }}">Poista</a>
 {% endif %}
