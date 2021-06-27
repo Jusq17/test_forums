@@ -88,6 +88,22 @@ def forum(forum_id):
 
     return render_template("forum.html", count=count, messages=messages, comments=comments, session = session, id_num = id_num, forum_id = forum_id, args = args) 
 
+@app.route("/secret_forum/<int:forum_id>")
+def forum(forum_id):
+    id_num = 1
+    comment_list = []
+    result = db.session.execute("SELECT COUNT(*) FROM messages")
+    count = result.fetchone()[0]
+    result = db.session.execute("SELECT content, id, username, sent_at FROM secret_messages WHERE forum_id=:forum_id Group By id", {"forum_id":forum_id})
+    messages = result.fetchall()
+    result = db.session.execute("SELECT id, content, username, sent_at, message_id, forum_id FROM secret_comments WHERE forum_id=:forum_id GROUP BY id", {"forum_id":forum_id})
+    comments = result.fetchall()
+    args = (request.view_args)
+    print('Hello world!', file=sys.stderr)
+
+
+    return render_template("forum.html", count=count, messages=messages, comments=comments, session = session, id_num = id_num, forum_id = forum_id, args = args) 
+
 @app.route("/login",methods=["POST"])
 def login():
     username = request.form["username"]
