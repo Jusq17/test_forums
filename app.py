@@ -22,7 +22,7 @@ db = SQLAlchemy(app)
 @app.route("/")
 def index():
     
-    admin_rights = 0
+    admin_rights = '0'
 
     if 'username' in session:
 
@@ -35,7 +35,7 @@ def index():
             
             admin_rights = admin_rights.strip(",'()")
         else:
-            admin_rights = 0
+            admin_rights = '0'
     
 
     #if session["username"] != None and session["username"] in admins:
