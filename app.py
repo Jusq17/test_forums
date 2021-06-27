@@ -27,7 +27,7 @@ def index():
         username = session["username"]
 
     result = db.session.execute("SELECT admin_rights FROM users WHERE username =:username", {'username':username})
-    admin_rights = int(str(result.fetchone().strip(",'()"))
+    admin_rights = int(str(result.fetchone().strip(",'()")))
     
 
     #if session["username"] != None and session["username"] in admins:
