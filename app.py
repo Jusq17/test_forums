@@ -234,7 +234,7 @@ def comment(id_num, forum_id):
     return render_template("comment.html",id_num =id_num, forum_id=forum_id)
 
 @app.route("/secret_comment/<int:id_num>/<int:forum_id>")
-def comment(id_num, forum_id):
+def secret_comment(id_num, forum_id):
     return render_template("secret_comment.html",id_num =id_num, forum_id=forum_id)
 
 
