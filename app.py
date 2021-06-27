@@ -1,6 +1,6 @@
 from typing import Any
 from flask import Flask
-from flask import redirect, render_template, request, session, flash
+from flask import redirect, render_template, request, session, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import sql
 from sqlalchemy.sql.elements import Null
@@ -223,7 +223,7 @@ def send():
     sql = "INSERT INTO messages (content, username, sent_at, forum_id) VALUES (:content,:kayttaja,:aika,:forum_id)"
     db.session.execute(sql, {"content":content,"kayttaja":kayttaja,"aika":aika,'forum_id':forum_id})
     db.session.commit()
-    return redirect(url_for("forum", forum_id=forum_id))
+    return redirect("/")
 
 @app.route("/send_secret_message", methods=["POST"])
 def send_secret_message():
@@ -234,7 +234,7 @@ def send_secret_message():
     sql = "INSERT INTO secret_messages (content, username, sent_at, forum_id) VALUES (:content,:kayttaja,:aika,:forum_id)"
     db.session.execute(sql, {"content":content,"kayttaja":kayttaja,"aika":aika,'forum_id':forum_id})
     db.session.commit()
-    return redirect(url_for("secret_forum", forum_id=forum_id))
+    return redirect("/")
 
 
 @app.route("/comment/<int:id_num>/<int:forum_id>")
@@ -256,7 +256,7 @@ def send_comment():
     sql = "INSERT INTO comments (content,message_id,forum_id,username,sent_at) VALUES (:content,:message_id,:forum_id, :username, :sent_at)"
     db.session.execute(sql, {"content":content, "message_id":message_id, "forum_id":forum_id, "username":username,"sent_at":sent_at})
     db.session.commit()
-    return redirect(url_for("forum", forum_id=forum_id))
+    return redirect("/")
 
 @app.route("/send_secret_comment", methods=["POST"])
 def send_secret_comment():
@@ -268,7 +268,7 @@ def send_secret_comment():
     sql = "INSERT INTO secret_comments (content,message_id,forum_id,username,sent_at) VALUES (:content,:message_id,:forum_id, :username, :sent_at)"
     db.session.execute(sql, {"content":content, "message_id":message_id, "forum_id":forum_id, "username":username,"sent_at":sent_at})
     db.session.commit()
-    return redirect(url_for('forum', forum_id=forum_id))
+    return redirect("/")
 
 @app.route("/edit_message/<int:id_num>")
 def edit_message(id_num):
@@ -294,7 +294,7 @@ def update_message():
     sql = "UPDATE messages Set content = :content Where id =:id_num"
     db.session.execute(sql, {"content":content, "id_num":id_num})
     db.session.commit()
-    return redirect(url_for("forum", forum_id=forum_id))
+    return redirect("/")
 
 @app.route("/update_secret_message", methods=["POST"])
 def update_secret_message():
@@ -304,7 +304,7 @@ def update_secret_message():
     sql = "UPDATE secret_messages Set content = :content Where id =:id_num"
     db.session.execute(sql, {"content":content, "id_num":id_num})
     db.session.commit()
-    return redirect(url_for("secret_forum", forum_id=forum_id))
+    return redirect("/")
 
 @app.route("/update_comment", methods=["POST"])
 def update_comment():
@@ -314,7 +314,7 @@ def update_comment():
     sql = "UPDATE comments Set content = :content Where id =:id_num and forum_id = :forum_id"
     db.session.execute(sql, {"content":content, "id_num":id_num, "forum_id":forum_id})
     db.session.commit()
-    return redirect(url_for("forum", forum_id=forum_id))
+    return redirect("/")
 
 @app.route("/update_secret_comment", methods=["POST"])
 def update_secret_comment():
@@ -324,7 +324,7 @@ def update_secret_comment():
     sql = "UPDATE secret_comments Set content = :content Where id =:id_num and forum_id = :forum_id"
     db.session.execute(sql, {"content":content, "id_num":id_num, "forum_id":forum_id})
     db.session.commit()
-    return redirect(url_for("secret_forum", forum_id=forum_id))
+    return redirect("/")
 
 
 
@@ -342,7 +342,7 @@ def delete_message(id_num):
 
     db.session.commit()
 
-    return redirect(url_for("forum", forum_id=forum_id))
+    return redirect("/")
 
 @app.route("/delete_secret_message/<int:id_num>")
 def delete_secret_message(id_num):
@@ -358,7 +358,7 @@ def delete_secret_message(id_num):
 
     db.session.commit()
 
-    return redirect(url_for("secret_forum", forum_id=forum_id))
+    return redirect("/")
 
 
 @app.route("/delete_comment/<int:id_num>")
@@ -371,7 +371,7 @@ def delete_comment(id_num):
     db.session.execute(sql, {"id_num":id_num})
     db.session.commit()
 
-    return redirect(url_for("forum", forum_id=forum_id))
+    return redirect("/")
 
 
 @app.route("/delete_secret_comment/<int:id_num>")
@@ -384,7 +384,7 @@ def delete_secret_comment(id_num):
     db.session.execute(sql, {"id_num":id_num})
     db.session.commit()
 
-    return redirect(url_for("secret_forum", forum_id=forum_id))
+    return redirect("/")
 
 @app.route("/delete_forum/<int:id_num>")
 def delete_forum(id_num):
