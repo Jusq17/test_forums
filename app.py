@@ -58,10 +58,7 @@ def index():
             if message[1] == i:
 
                 j += 1
-        message_list.append(j)
-
-
-        
+        message_list.append(j)     
 
     result = db.session.execute("SELECT subject, id, username, sent_at FROM forums")
     forums = result.fetchall()
