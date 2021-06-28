@@ -13,8 +13,8 @@ from sqlalchemy.exc import IntegrityError
 
 
 app = Flask(__name__)
-app.secret_key = "6acd26905abd84a665fb892c4dec7a"
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///juseljus"
+app.secret_key = "salattu"
+app.config["SQLALCHEMY_DATABASE_URI"] = "salattu"
 
 
 db = SQLAlchemy(app)
