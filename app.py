@@ -277,11 +277,11 @@ def edit_secret_message(id_num):
 
 @app.route("/edit_comment/<int:id_num>/<int:forum_id>") 
 def edit_comment(id_num, forum_id):
-    return render_template("edit_comment.html", id_num = id_num, forum_id = forum_id)
+    return render_template("edit_comment.html", id_num = id_num)
 
 @app.route("/edit_secret_comment/<int:id_num>/<int:forum_id>") 
 def edit_secret_comment(id_num, forum_id):
-    return render_template("edit_secret_comment.html", id_num = id_num, forum_id = forum_id)
+    return render_template("edit_secret_comment.html", id_num = id_num)
 
 @app.route("/update_message", methods=["POST"])
 def update_message():
