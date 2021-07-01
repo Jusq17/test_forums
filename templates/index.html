@@ -5,7 +5,11 @@
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 
-{{ request.args }}
+<br>
+
+{{ request.args.get('error') }}
+
+<br>
 
 Palstoja: {{ count }}
 <hr>
