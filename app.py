@@ -293,7 +293,7 @@ def edit_secret_message(id_num):
     rights = result.fetchone()
     
     if rights != None:
-        return render_template("edit_comment.html", id_num = id_num, content = content)
+        return render_template("edit_secret_message.html", id_num = id_num, content = content)
     else:
         flash("Ei sallitua")
         return redirect("/")
@@ -320,7 +320,7 @@ def edit_secret_comment(id_num):
     rights = result.fetchone()
     
     if rights != None:
-        return render_template("edit_comment.html", id_num = id_num, content = content)
+        return render_template("edit_secret_comment.html", id_num = id_num, content = content)
     else:
         flash("Ei sallitua")
         return redirect("/")
