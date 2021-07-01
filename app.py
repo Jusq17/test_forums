@@ -250,6 +250,10 @@ def send_comment():
     forum_id = request.form["forum_id"]
     username = session["username"]
     sent_at = datetime.now().replace(second=0, microsecond=0)
+    
+    if len(content) > 200:
+        flash('Liian pitkä viesti')
+        return redirect("/")
     sql = "INSERT INTO comments (content,message_id,forum_id,username,sent_at) VALUES (:content,:message_id,:forum_id, :username, :sent_at)"
     db.session.execute(sql, {"content":content, "message_id":message_id, "forum_id":forum_id, "username":username,"sent_at":sent_at})
     db.session.commit()
@@ -282,7 +286,7 @@ def edit_comment(id_num):
     result = db.session.execute(sql,{"id_num":id_num, "username":username})
     rights = result.fetchone()
     
-    if len(rights) >= 1:
+    if rights != None:
         return render_template("edit_comment.html", id_num = id_num)
     else:
         return redirect("/")
