@@ -281,7 +281,7 @@ def edit_comment(id_num):
     result = db.session.execute(sql,{"id_num":id_num, "username":username})
     rights = result.fetchone()
     
-    if rights = 1:
+    if len(rights) >= 1:
         return render_template("edit_comment.html", id_num = id_num)
     else:
         return redirect("/")
