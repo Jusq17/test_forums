@@ -284,7 +284,7 @@ def edit_message(id_num,content):
     rights = result.fetchone()
     
     if rights != None:
-        return render_template("edit_comment.html", id_num = id_num, content = content)
+        return render_template("edit_message.html", id_num = id_num, content = content)
     else:
         flash("Ei sallitua")
         error = 'Ei sallittua'
