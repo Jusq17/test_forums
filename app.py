@@ -288,7 +288,7 @@ def edit_message(id_num,content):
     else:
         flash("Ei sallitua")
         error = 'Ei sallittua'
-        return render_template("index.html", error = error)
+        return redirect("/", error = error)
     return render_template("edit_message.html",id_num = id_num)
 
 @app.route("/edit_secret_message/<int:id_num>/<content>")
