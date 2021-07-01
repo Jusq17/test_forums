@@ -287,7 +287,7 @@ def edit_message(id_num,content):
         return render_template("edit_comment.html", id_num = id_num, content = content)
     else:
         flash("Ei sallitua")
-        error = 'Liian pitkä viesti'
+        error = 'Ei sallittua'
         return rendertemplate("index.html", error = error)
     return render_template("edit_message.html",id_num = id_num)
 
@@ -301,7 +301,7 @@ def edit_secret_message(id_num, content):
     if rights != None:
         return render_template("edit_secret_message.html", id_num = id_num, content = content)
     else:
-        error = 'Liian pitkä viesti'
+        error = 'Ei sallittua'
         return rendertemplate("index.html", error = error)
     return render_template("edit_secret_message.html",id_num = id_num)
 
@@ -315,7 +315,7 @@ def edit_comment(id_num, content):
     if rights != None:
         return render_template("edit_comment.html", id_num = id_num, content = content)
     else:
-        error = 'Liian pitkä viesti'
+        error = 'Ei sallittua'
         return rendertemplate("index.html", error = error)
 
 @app.route("/edit_secret_comment/<int:id_num>/<content>") 
@@ -328,7 +328,7 @@ def edit_secret_comment(id_num, content):
     if rights != None:
         return render_template("edit_secret_comment.html", id_num = id_num, content = content)
     else:
-        error = 'Liian pitkä viesti'
+        error = 'Ei sallittua'
         return rendertemplate("index.html", error = error)
     return render_template("edit_secret_comment.html", id_num = id_num)
 
