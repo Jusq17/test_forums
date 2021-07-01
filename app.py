@@ -277,8 +277,8 @@ def edit_secret_message(id_num):
 
 @app.route("/edit_comment/<int:id_num>") 
 def edit_comment(id_num):
-    "sql = "SELECT 1 FROM comments WHERE id =:id_num and username =:username"
-    result = db.session.execute(sql,"id_num":id_num, "username":username)
+    sql = "SELECT 1 FROM comments WHERE id =:id_num and username =:username"
+    result = db.session.execute(sql,{"id_num":id_num, "username":username})
     rights = result.fetchone()
     
     if rights = 1:
