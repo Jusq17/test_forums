@@ -217,6 +217,11 @@ def send():
     kayttaja = session["username"]
     aika = datetime.now().replace(second=0, microsecond=0)
     forum_id = request.form['forum_id']
+    
+    if len(content) > 100:
+        error = 'Liian pitkä viesti'
+        return rendertemplate("index.html", error = error)
+    
     sql = "INSERT INTO messages (content, username, sent_at, forum_id) VALUES (:content,:kayttaja,:aika,:forum_id)"
     db.session.execute(sql, {"content":content,"kayttaja":kayttaja,"aika":aika,'forum_id':forum_id})
     db.session.commit()
@@ -252,8 +257,8 @@ def send_comment():
     sent_at = datetime.now().replace(second=0, microsecond=0)
     
     if len(content) > 200:
-        flash('Liian pitkä viesti')
-        return redirect("/")
+        error = 'Liian pitkä viesti'
+        return rendertemplate("index.html", error = error)
     sql = "INSERT INTO comments (content,message_id,forum_id,username,sent_at) VALUES (:content,:message_id,:forum_id, :username, :sent_at)"
     db.session.execute(sql, {"content":content, "message_id":message_id, "forum_id":forum_id, "username":username,"sent_at":sent_at})
     db.session.commit()
@@ -282,7 +287,8 @@ def edit_message(id_num,content):
         return render_template("edit_comment.html", id_num = id_num, content = content)
     else:
         flash("Ei sallitua")
-        return redirect("/")
+        error = 'Liian pitkä viesti'
+        return rendertemplate("index.html", error = error)
     return render_template("edit_message.html",id_num = id_num)
 
 @app.route("/edit_secret_message/<int:id_num>/<content>")
@@ -295,8 +301,8 @@ def edit_secret_message(id_num, content):
     if rights != None:
         return render_template("edit_secret_message.html", id_num = id_num, content = content)
     else:
-        flash("Ei sallitua")
-        return redirect("/")
+        error = 'Liian pitkä viesti'
+        return rendertemplate("index.html", error = error)
     return render_template("edit_secret_message.html",id_num = id_num)
 
 @app.route("/edit_comment/<int:id_num>/<content>") 
@@ -309,8 +315,8 @@ def edit_comment(id_num, content):
     if rights != None:
         return render_template("edit_comment.html", id_num = id_num, content = content)
     else:
-        flash("Ei sallitua")
-        return redirect("/")
+        error = 'Liian pitkä viesti'
+        return rendertemplate("index.html", error = error)
 
 @app.route("/edit_secret_comment/<int:id_num>/<content>") 
 def edit_secret_comment(id_num, content):
@@ -322,8 +328,8 @@ def edit_secret_comment(id_num, content):
     if rights != None:
         return render_template("edit_secret_comment.html", id_num = id_num, content = content)
     else:
-        flash("Ei sallitua")
-        return redirect("/")
+        error = 'Liian pitkä viesti'
+        return rendertemplate("index.html", error = error)
     return render_template("edit_secret_comment.html", id_num = id_num)
 
 @app.route("/update_message", methods=["POST"])
