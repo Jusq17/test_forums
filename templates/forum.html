@@ -7,6 +7,15 @@
 
 <br>
 
+{% with messages = get_flashed_messages() %}  
+         {% if messages %}  
+               {% for message in messages %}  
+                    <p>{{ message }}</p>  
+               {% endfor %}  
+         {% endif %}  
+      {% endwith %}  
+<br>
+
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 
 <form action="/send_message" method="POST">
