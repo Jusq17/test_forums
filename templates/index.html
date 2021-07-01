@@ -5,10 +5,13 @@
 
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 
-<br>
+{% if request.args.get('error') != None %}
 
 {{ request.args.get('error') }}
 
+{%endif%}
+
+<br>
 <br>
 
 Palstoja: {{ count }}
