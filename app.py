@@ -367,7 +367,7 @@ def update_secret_comment():
     content = request.form["content"]
     id_num = request.form["id_num"]
    
-    sql = "UPDATE secret_comments Set content = :content Where id =:id_num and forum_id = :forum_id"
+    sql = "UPDATE secret_comments Set content = :content Where id =:id_num"
     db.session.execute(sql, {"content":content, "id_num":id_num, "forum_id":forum_id})
     db.session.commit()
     return redirect("/")
