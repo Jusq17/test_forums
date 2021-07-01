@@ -284,7 +284,7 @@ def edit_comment(id_num):
    # if rights = 1:
     #    return render_template("edit_comment.html", id_num = id_num)
    # else:
-      #  return redirect("/")
+    return redirect("/")
 
 @app.route("/edit_secret_comment/<int:id_num>") 
 def edit_secret_comment(id_num):
