@@ -286,7 +286,7 @@ def edit_message(id_num,content):
     return render_template("edit_message.html",id_num = id_num)
 
 @app.route("/edit_secret_message/<int:id_num>/<content>")
-def edit_secret_message(id_num):
+def edit_secret_message(id_num, content):
     username = session["username"]
     sql = "SELECT 1 FROM secret_messages WHERE id =:id_num and username =:username"
     result = db.session.execute(sql,{"id_num":id_num, "username":username})
@@ -313,7 +313,7 @@ def edit_comment(id_num, content):
         return redirect("/")
 
 @app.route("/edit_secret_comment/<int:id_num>/<content>") 
-def edit_secret_comment(id_num):
+def edit_secret_comment(id_num, content):
     username = session["username"]
     sql = "SELECT 1 FROM secret_comments WHERE id =:id_num and username =:username"
     result = db.session.execute(sql,{"id_num":id_num, "username":username})
