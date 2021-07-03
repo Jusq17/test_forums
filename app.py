@@ -118,11 +118,13 @@ def login():
     result = db.session.execute(sql, {"username":username})
     user_password = result.fetchone()
     
+    hash_value = user_password[0]
+    
     if user_password == None:
         flash('Käyttäjää ei ole olemassa')
         return redirect("/")
     else:
-        if check_password_hash(user_password, password):
+        if check_password_hash(hash_value, password):
             
             session['username'] = username
             return redirect("/")
