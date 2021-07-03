@@ -117,32 +117,23 @@ def login():
     sql = "SELECT password FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     user_password = result.fetchone()
-    user_password = str(user_password)
-    user_password = user_password.strip(",'()")  
-    #print(user)  
+    
     if user_password == None:
-        # TODO: invalid username
-           
+        flash('Käyttäjää ei ole olemassa')
         return redirect("/")
     else:
-        if password == str(user_password):
-
-            session["username"] = username
-            #session.username = username
-            return redirect("/")
-
-
-
-        else:
-            # TODO: invalid password
-            #print(user)
-            #app.logger.info(user)
-            #print('Hello world!', file=sys.stderr)
-            flash('väärä salasana')
+        if check_password_hash(user_password, password):
             
+            session['username'] = username
             return redirect("/")
-
-
+        else:
+            flash('Väärä salasana')
+            return redirect('/')
+        
+    #user_password = str(user_password)
+    #user_password = user_password.strip(",'()")  
+    #print(user)  
+   
 @app.route("/logout")
 def logout():
     del session["username"]
@@ -173,11 +164,13 @@ def new_user():
         return redirect("/")
 
     elif password1 == password2 and len(password1) > 0:
+        
+        password = generate_password_hash(password1)
 
-        sql = "Insert Into users (username, password) Values (:username, :password1)"
+        sql = "Insert Into users (username, password) Values (:username, :password)"
         
         try:
-            db.session.execute(sql, {"username":username,"password1": password1})
+            db.session.execute(sql, {"username":username,"password": password})
         
             db.session.commit()
         except IntegrityError:
