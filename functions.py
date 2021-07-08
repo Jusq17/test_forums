@@ -1,3 +1,5 @@
+from db import db
+
 @app.route("/login",methods=["POST"])
 def login():
     username = request.form["username"]
