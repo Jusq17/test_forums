@@ -10,7 +10,7 @@ import logging
 import sys
 from sqlalchemy.exc import IntegrityError
 
-
+a¨skfäpsokfäpsokf
 
 app = Flask(__name__)
 app.secret_key = "salattu"
