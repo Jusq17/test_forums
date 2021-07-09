@@ -202,27 +202,27 @@ def new():
 @app.route("/send_message", methods=["POST"])
 def send():
     content = request.form["content"]
-    kayttaja = session["username"]
-    aika = datetime.now().replace(second=0, microsecond=0)
+    username = session["username"]
+    sent_at = datetime.now().replace(second=0, microsecond=0)
     forum_id = request.form['forum_id']
     
     if len(content) > 100:
         error = 'Liian pitkä viesti'
         return rendertemplate("index.html", error = error)
     
-    sql = "INSERT INTO messages (content, username, sent_at, forum_id) VALUES (:content,:kayttaja,:aika,:forum_id)"
-    db.session.execute(sql, {"content":content,"kayttaja":kayttaja,"aika":aika,'forum_id':forum_id})
+    sql = "INSERT INTO messages (content, username, sent_at, forum_id) VALUES (:content,:user,:sent_at,:forum_id)"
+    db.session.execute(sql, {"content":content,"user":username,"sent_at":sent_at,'forum_id':forum_id})
     db.session.commit()
     return redirect("/")
 
 @app.route("/send_secret_message", methods=["POST"])
 def send_secret_message():
     content = request.form["content"]
-    kayttaja = session["username"]
-    aika = datetime.now().replace(second=0, microsecond=0)
+    username = session["username"]
+    sent_at = datetime.now().replace(second=0, microsecond=0)
     forum_id = request.form['forum_id']
-    sql = "INSERT INTO secret_messages (content, username, sent_at, forum_id) VALUES (:content,:kayttaja,:aika,:forum_id)"
-    db.session.execute(sql, {"content":content,"kayttaja":kayttaja,"aika":aika,'forum_id':forum_id})
+    sql = "INSERT INTO secret_messages (content, username, sent_at, forum_id) VALUES (:content,:user,:sent_at,:forum_id)"
+    db.session.execute(sql, {"content":content,"user":username,"sent_at":sent_at,'forum_id':forum_id})
     db.session.commit()
     return redirect("/")
 
