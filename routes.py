@@ -1,3 +1,5 @@
+from app import app
+from db import db
 from typing import Any
 from flask import Flask
 from flask import redirect, render_template, request, session, flash, url_for
@@ -9,11 +11,6 @@ from datetime import datetime
 import logging
 import sys
 from sqlalchemy.exc import IntegrityError
-
-
-
-app = Flask(__name__)
-app.secret_key = "salattu"
 
 @app.route("/")
 def index():
