@@ -40,7 +40,7 @@ Lähettäjä:{{ forum[2] }}
 {{ forum[3] }}
 <br>
 
-Keskusteluja: {{ message_list[loop.index] }}
+Keskusteluja: {{ message_list[loop.index-1] }}
 
 <br>
 <a href="{{ url_for('forum',forum_id = forum[1]) }}">Mene palstalle!</a>
