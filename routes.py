@@ -456,23 +456,16 @@ def delete_secret_forum(id_num):
 @app.route("/search", methods=["POST"])
 def search():
 
-    s_word = request.form["content"]
-    
-    s = str.strip(s_word,"'")
+    s_word = request.args["content"]
 
     username = session["username"]
 
-    sql = "UPDATE users Set s_word = :s_word Where username = :username"
-
-    db.session.execute(sql, {"username":username, "s_word":s_word})
-    db.session.commit()
-
-    result = db.session.execute("SELECT messages.content, users.s_word from messages, users Where users.username = :username and messages.content LIKE  '%' || users.s_word  || '%'"  ,{"username":username, "s_word":s_word})
+    result = db.session.execute("SELECT messages.content, users.s_word from messages, users Where users.username = :username and messages.content LIKE s_word" ,{"username":username, "s_word":"%"+s_word+"%"})
 
     messages = result.fetchall()
     db.session.commit()
 
-    result = db.session.execute("SELECT comments.content, users.s_word from comments, users Where users.username = :username and comments.content LIKE '%' || users.s_word || '%'",{"username":username, "s_word":s_word})
+    result = db.session.execute("SELECT comments.content, users.s_word from comments, users Where users.username = :username and comments.content LIKE s_word" ,{"username":username, "s_word":"%"+s_word+"%"})
 
 
     comments = result.fetchall()
