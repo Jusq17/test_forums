@@ -451,19 +451,17 @@ def delete_secret_forum(id_num):
 
     return redirect("/")
 
-
-
 @app.route("/search", methods=["POST"])
 def search():
 
     s_word = request.form["content"]
 
-    result = db.session.execute("SELECT content from messages Where content LIKE s_word",{"s_word":"%"+s_word+"%"})
+    result = db.session.execute("SELECT content from messages Where content LIKE :s_word",{"s_word":"%"+s_word+"%"})
 
     messages = result.fetchall()
     db.session.commit()
 
-    result = db.session.execute("SELECT content from comments Where content LIKE s_word",{"s_word":"%"+s_word+"%"})
+    result = db.session.execute("SELECT content from comments Where content LIKE :s_word",{"s_word":"%"+s_word+"%"})
 
     comments = result.fetchall()
     db.session.commit()
