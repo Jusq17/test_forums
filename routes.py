@@ -458,15 +458,12 @@ def search():
 
     s_word = request.args["content"]
 
-    username = session["username"]
-
-    result = db.session.execute("SELECT content from messages Where content LIKE s_word",{"username":username, "s_word":"%"+s_word+"%"})
+    result = db.session.execute("SELECT content from messages Where content LIKE s_word",{"s_word":"%"+s_word+"%"})
 
     messages = result.fetchall()
     db.session.commit()
 
-    result = db.session.execute("SELECT content from comments Where content LIKE s_word",{"username":username, "s_word":"%"+s_word+"%"})
-
+    result = db.session.execute("SELECT content from comments Where content LIKE s_word",{"s_word":"%"+s_word+"%"})
 
     comments = result.fetchall()
     db.session.commit()
