@@ -50,7 +50,7 @@ def index():
         
         id_num = forum[1]
         
-        result = db.session.execute("SELECT COUNT(*) FROM messages WHERE message_id = id_num",{"id_num":id_num})
+        result = db.session.execute("SELECT COUNT(*) FROM messages WHERE forum_id = id_num",{"id_num":id_num})
         message_count = result.fetchone()[0]
         message_list.append(message_count)
 
