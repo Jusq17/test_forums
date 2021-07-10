@@ -456,7 +456,7 @@ def delete_secret_forum(id_num):
 @app.route("/search", methods=["POST"])
 def search():
 
-    s_word = request.args["content"]
+    s_word = request.form["content"]
 
     result = db.session.execute("SELECT content from messages Where content LIKE s_word",{"s_word":"%"+s_word+"%"})
 
