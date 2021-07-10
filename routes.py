@@ -41,21 +41,18 @@ def index():
     result = db.session.execute("SELECT COUNT(*) FROM forums")
     count = result.fetchone()[0]
     result = db.session.execute("SELECT content, forum_id FROM messages")
-    messages = result.fetchall()
-
-    for i in range(count+1):
-
-        j = 0
-
-        for message in messages:
-
-            if message[1] == i:
-
-                j += 1
-        message_list.append(j)     
+    messages = result.fetchall()     
 
     result = db.session.execute("SELECT subject, id, username, sent_at FROM forums")
     forums = result.fetchall()
+    
+    for forum in forums:
+        
+        id_num = forum[1]
+        
+        result = db.session.execute("SELECT COUNT(*) FROM messages WHERE message_id = id_num",{"id_num":id_num})
+        message_count = result.fetchone()[0]
+        message_list.append(message_count)
 
     secret_forums = None
 
