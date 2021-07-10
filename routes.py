@@ -161,6 +161,14 @@ def new_user():
 
     elif password1 == password2 and len(password1) > 0:
         
+        if len(password1) < 5:
+            flash('Salasanan täytyy olla vähintään 5 merkkiä pitkä')
+            return redirect("/")
+        
+        if len(password1) > 50:
+            flash('Salasanan täytyy olla alle 50 merkkiä pitkä')
+            return redirect("/")
+        
         password = generate_password_hash(password1)
 
         sql = "Insert Into users (username, password) Values (:username, :password)"
