@@ -149,10 +149,6 @@ def new_user():
     result = db.session.execute('SELECT username FROM users')
     users = result.fetchall()
 
-    print('Käyttäjä jo olemassa', file=sys.stderr)
-
-
-
     if username in users:
 
         flash('Käyttäjänimi on jo käytössä')
