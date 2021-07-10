@@ -1,5 +1,6 @@
 from app import app
 from db import db
+import fuctions
 from typing import Any
 from flask import Flask
 from flask import redirect, render_template, request, session, flash, url_for
