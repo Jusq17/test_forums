@@ -109,6 +109,14 @@ def login():
     result = db.session.execute(sql, {"username":username})
     user_password = result.fetchone()
     
+    result = db.session.execute("SELECT username FROM users")
+    users = result.fetchall()
+    
+    if username not in users:
+        
+        flash('Käyttäjää ei ole olemassa')
+        return redirect("/")
+    
     hash_value = user_password[0]
     
     if user_password == None:
@@ -122,10 +130,6 @@ def login():
         else:
             flash('Väärä salasana')
             return redirect('/')
-        
-    #user_password = str(user_password)
-    #user_password = user_password.strip(",'()")  
-    #print(user)  
    
 @app.route("/logout")
 def logout():
