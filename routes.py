@@ -112,7 +112,7 @@ def login():
     result = db.session.execute("SELECT username FROM users")
     users = result.fetchall()
     
-    if username not in users:
+    if username not in users[0]:
         
         flash('Käyttäjää ei ole olemassa')
         return redirect("/")
